@@ -1,0 +1,25 @@
+{
+  "source": {
+    "hosts": [
+      "github.enterprise.com",
+      "testing.github.enterprise.com",
+      "staging.github.enterprise.com",
+      "github.com"
+    ]
+  },
+  "dest": [
+    {
+      "host": "github.com",
+      "orgs": [
+        "enterprise",
+        "enterprise-azure"
+      ]
+    },
+    {
+      "host": "enterprise.com",
+      "orgs": [
+        "all"
+      ]
+    }
+  ]
+}

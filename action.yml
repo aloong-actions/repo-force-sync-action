@@ -1,0 +1,52 @@
+name: Git Force Sync Action
+author: Loong Zhou
+description: 🔃  Force sync [the branch of source repo] to [specific branch of destination repo].
+branding:
+  icon: 'git-branch'
+  color: 'gray-dark'
+inputs:
+  source_host:
+    description: your source github host url, default to 'github.com'
+    required: false
+    default: github.com
+  source_repo:
+    description: GitHub repo slug or full url
+    required: true
+  source_branch:
+    description: Branch name to sync from
+    required: true
+  destination_host:
+    description: your destination github host url, default to 'github.com'
+    required: false
+    default: github.com
+  destination_repo:
+    description: GitHub repo slug or full url
+    required: true
+  destination_branch:
+    description: Branch name to sync to
+    required: true
+  source_ssh_private_key:
+    description: SSH key used to authenticate with source ssh url provided (optional if public or https url with authentication)
+    required: false
+  source_access_token:
+    source: The personal access token you created for source repo https authentication
+  destination_ssh_private_key:
+    description: SSH key used to authenticate with destination ssh url provided (optional if public or https url with authentication)
+    required: false
+  destination_access_token:
+    description: The personal access token you created for dest repo https authentication
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    SOURCE_SSH_PRIVATE_KEY: ${{ inputs.source_ssh_private_key }}
+    SOURCE_ACCESS_TOKEN: ${{ inputs.source_access_token }}
+    DESTINATION_SSH_PRIVATE_KEY: ${{ inputs.destination_ssh_private_key }}
+    DESTINATION_ACCESS_TOKEN: ${{ inputs.destination_access_token }}
+  args:
+    - ${{ inputs.source_host }}
+    - ${{ inputs.source_repo }}
+    - ${{ inputs.source_branch }}
+    - ${{ inputs.destination_host }}
+    - ${{ inputs.destination_repo }}
+    - ${{ inputs.destination_branch }}
